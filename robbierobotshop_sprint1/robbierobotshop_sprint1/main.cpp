@@ -1,9 +1,11 @@
 #include <iostream>
+#include "control.h"
+
 
 using namespace std;
-int main() 
+
+int main()
 {
-	//added a new comment
-	cout << "Just created\n";
+	control();
 	return 0;
 }
