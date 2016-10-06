@@ -11,8 +11,4 @@ void control();
 
 
 
-
-
-
-
 #endif

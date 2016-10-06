@@ -8,4 +8,5 @@ int main()
 {
 	control();
 	return 0;
+	
 }

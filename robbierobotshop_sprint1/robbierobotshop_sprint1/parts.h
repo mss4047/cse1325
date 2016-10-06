@@ -1,5 +1,5 @@
-#ifndef PARTS_H
-#define PARTS_H
+	#ifndef PARTS_H
+	#define PARTS_H
 #include <string>
 #include <iostream>
 #include <vector>
@@ -15,28 +15,34 @@ public:
 	double weight;
 	double cost;
 	string desc;
-	robo();
-	void setter(string name, int p_num, string type, double weight, double cost, string desc);
-	//virtual void setVal() = 0;
-
+	//robo();
+	//void setter();
+	virtual void mysetter(string name, int p_num, string type, double weight, double cost, string desc) = 0;
 };
 
 class Locomotor : public robo
 {
-	Locomotor();
+public:
+	//Locomotor();
+	virtual void mysetter(string name, int p_num, string type, double weight, double cost, string desc);
 	int max_speed;
+	int power_conloco;
 };
 
 class Arm : public robo
 {
-	Arm();
+public:
+	//Arm();
+	virtual void mysetter(string name, int p_num, string type, double weight, double cost, string desc);
 	void setArm(int Power_Con);
 	int power_con;
 };
 
 class Battery : public robo
 {
-	Battery();
+public:
+	virtual void mysetter(string name, int p_num, string type, double weight, double cost, string desc);
+	//Battery();
 	void setBattery(double Energy, double power);
 	double energy;
 	double maxPower;
@@ -44,13 +50,17 @@ class Battery : public robo
 
 class Head : public robo
 {
-	Head();
+public:
+	//Head();
+	virtual void mysetter(string name, int p_num, string type, double weight, double cost, string desc);
 };
 
 class Torso : public robo
 {
-	Torso();
-	int battery;
+public:
+	//Torso();
+	virtual void mysetter(string name, int p_num, string type, double weight, double cost, string desc);
+	int battery_compartment;
 	vector<Arm> arms;
 	vector<Battery> bat;
 };
