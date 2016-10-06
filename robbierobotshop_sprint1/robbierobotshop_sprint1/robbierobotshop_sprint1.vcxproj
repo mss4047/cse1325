@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="control.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="parts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="control.h" />
