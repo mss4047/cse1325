@@ -7,8 +7,6 @@
 
 using namespace std;
 
-void control();
-
-
+void menu();
 
 #endif

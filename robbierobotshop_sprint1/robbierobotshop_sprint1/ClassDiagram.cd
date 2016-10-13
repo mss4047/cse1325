@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="robo">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAVIABgAAAAAAAAAAA=</HashCode>
+      <FileName>parts.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Locomotor">
+    <Position X="2.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAABEAA=</HashCode>
+      <FileName>parts.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Arm">
+    <Position X="7.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAEAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>parts.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battery">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAEQAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>parts.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Head">
+    <Position X="5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>parts.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Torso">
+    <Position X="9.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAAAAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>parts.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

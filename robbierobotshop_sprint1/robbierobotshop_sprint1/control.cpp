@@ -1,15 +1,63 @@
 #include "control.h"
 #include "parts.h"
+#include "robotmodel.h"
 
 const string types[5] = { "torso","head","arm","locomotor","battery" };
+vector<model> models;
+vector<robo*> repo;
+void robotmodel()
+{
+	model forge;
 
+	cout << "Select the parts you would like to create a model with. If no parts have been stored, you will be returned to the main menu.\n";
+	if (repo.size() == 0)
+	{
+		cout << "No parts found!";
+		return;
+	}
+	else
+	{
+		cout << "A list of the name and part number of the parts stored will be displayed. Enter [y] once you see the one you need\n";
+		for (unsigned int i = 0; i<repo.size(); i++)
+		{
+			char let;
+			cout << repo[i]->name;
+			cout << repo[i]->p_num;
+			cout << "\n[y/n]\n";
+			cin >> let;
+			if (let == 'y')
+			{
+				forge.parts.push_back(repo[i]);
+				break;
+			}
+			else
+			{
+				continue;
+			}
+		}
+		
+	cout << "Input the follolwing information of the robot model\n";
+	
+	cout << "Name: ";
+	cin.ignore();
+	cin.clear();
+	getline(cin, forge.name);
+	
+	cout << "Model number: ";
+	cin >> forge.modelNumber;
+	
+	cout << "Price: ";
+	cin >> forge.price;
+	
+	models.push_back(forge);
+	}
+
+}
 void createnewpart()
 {
-	cout << "Choose a part type (input a number only):\n(1.) Torso\n(2.) Head\n(3.) Arm\n(4.) Locomotor\n(5.) Battery\n";
+	cout << "Choose a part type (input a number only):\n(1.) Torso\n(2.) Head\n(3.) Arm\n(4.) Locomotor\n(5.) Battery\n(6.) Return to previous menu\n";
 	int choice;
 	cin >> choice;
-
-	vector<robo*> repo;
 
 	if (choice == 1)
 	{
@@ -169,42 +217,80 @@ void createnewpart()
 
 		cout << "Added\n";
 	}
+	else if (choice == 6)
+	{
+		return;
+	}
 }
-
-
-
-
 
 void create()
 {
-	cout << "------------\n(1.) Create Robot Parts\n(2.) Robot Model\n(3.) Order\n(4.)Return to main menu\n ";
+	cout << "------------\n(1.) Create Robot Parts\n(2.) Robot Model\n(3.) Order\n(4.) Return to main menu\n ";
 	int a;
 	cin >> a;
-	while (a != 4) {
 
-	
-	if (a == 1)
-	{
-		createnewpart();
-	}
+		if (a == 1)
+		{
+			createnewpart();
+			return;
+		}
+		else if (a == 2)
+		{
+			robotmodel();
+			return;
+		}
 
-	}
+		else if (a == 4)
+		{
+			return;
+		}
 }
 
-void control()
-{
-	int n;
-	cout << "Welcome to the Robbie Robot Shop!\n";
-	cout << "What would you like to to do?\n";
-	cout << "(1). Create\n(2). Report\n(3). Quit\n ";
-	cin >> n;
-	if (n == 1)
+	void control()
 	{
-		create();
+		int n;
+		cin >> n;
+		if (n == 1)
+		{
+			cout << "(1.) Order\n(2.) Customer\n(3.) Sales Associate\n(4.) Robot Model\n(5.) Robot Component\n(6.) Back\n";
+			int inp;
+			cin >> inp;
+			if (inp == 5)
+			{
+				create();
+			}
+			else if(inp == 1 )
+			{
+				
+			}
+			else if (inp == 1)
+			{
+
+			}
+			else if (inp == 1)
+			{
+
+			}
+			else if (inp == 1)
+			{
+
+			}
+			else if (inp == 1)
+			{
+
+			}
+		}
+		if (n == 3)
+		{
+			cout << "\n\nGoodbye!\n\n";
+			exit(1);
+		}
 	}
-	if (n == 3)
+
+	void menu()
 	{
-		cout << "\n\nGoodbye!\n\n";
-		exit(1);
+		cout << "Welcome to the Robbie Robot Shop!\n";
+		cout << "What would you like to to do?\n";
+		cout << "(1). Create\n(2). Report\n(3). Quit\n ";
+		control();
 	}
-}
