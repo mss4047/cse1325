@@ -17,17 +17,19 @@ void robotmodel()
 	}
 	else
 	{
+		int flag = 0;
 		cout << "A list of the name and part number of the parts stored will be displayed. Enter [y] once you see the one you need\n";
 		for (unsigned int i = 0; i<repo.size(); i++)
 		{
 			char let;
-			cout << repo[i]->name;
-			cout << repo[i]->p_num;
+			cout << repo[i]->name<<endl;
+			cout << repo[i]->p_num<<endl;
 			cout << "\n[y/n]\n";
 			cin >> let;
 			if (let == 'y')
 			{
 				forge.parts.push_back(repo[i]);
+				flag++;
 				break;
 			}
 			else
@@ -35,7 +37,9 @@ void robotmodel()
 				continue;
 			}
 		}
-		
+		if(flag==0){
+			return;
+		}
 	cout << "Input the follolwing information of the robot model\n";
 	
 	cout << "Name: ";
@@ -50,12 +54,14 @@ void robotmodel()
 	cin >> forge.price;
 	
 	models.push_back(forge);
+
+	cout << "Robot Model Added Succesfully!\n";
 	}
 
 }
 void createnewpart()
 {
-	cout << "Choose a part type (input a number only):\n(1.) Torso\n(2.) Head\n(3.) Arm\n(4.) Locomotor\n(5.) Battery\n(6.) Return to previous menu\n";
+	cout << "Choose a part type (input a number only):\n(1.) Torso\n(2.) Head\n(3.) Arm\n(4.) Locomotor\n(5.) Battery\n(6.) Return to main menu\n";
 	int choice;
 	cin >> choice;
 
@@ -232,12 +238,10 @@ void create()
 		if (a == 1)
 		{
 			createnewpart();
-			return;
 		}
 		else if (a == 2)
 		{
 			robotmodel();
-			return;
 		}
 
 		else if (a == 4)
@@ -250,41 +254,47 @@ void create()
 	{
 		int n;
 		cin >> n;
+		
 		if (n == 1)
 		{
 			cout << "(1.) Order\n(2.) Customer\n(3.) Sales Associate\n(4.) Robot Model\n(5.) Robot Component\n(6.) Back\n";
-			int inp;
-			cin >> inp;
-			if (inp == 5)
-			{
-				create();
-			}
-			else if(inp == 1 )
-			{
+			
+				int inp;
+				cin >> inp;
 				
-			}
-			else if (inp == 1)
-			{
-
-			}
-			else if (inp == 1)
-			{
-
-			}
-			else if (inp == 1)
-			{
-
-			}
-			else if (inp == 1)
-			{
-
-			}
+				if (inp == 5)
+				{
+					create();
+				}
+				else if (inp == 1)
+				{
+					return;
+				}
+				else if (inp == 2)
+				{
+					return;
+				}
+				else if (inp == 3)
+				{
+					return;
+				}
+				else if (inp == 4)
+				{
+					return;
+				}
+				else if (inp == 6)
+				{
+					return;
+				}
 		}
-		if (n == 3)
-		{
-			cout << "\n\nGoodbye!\n\n";
-			exit(1);
-		}
+			else if (n == 3)
+			{
+				cout << "\n\nGoodbye!\n\n";
+				exit(1);
+
+			}
+		
+		
 	}
 
 	void menu()
