@@ -1,10 +1,19 @@
 #include "control.h"
 #include "parts.h"
 #include "robotmodel.h"
+#include <fstream>
+#include<iterator>
 
 const string types[5] = { "torso","head","arm","locomotor","battery" };
 vector<model> models;
 vector<robo*> repo;
+
+void printtofile()
+{
+	std::ofstream output_file("./store.txt");
+	ostream_iterator<string> output_iterator(output_file, "\n");
+	copy(repo.begin(), repo.end(), output_iterator);
+}
 void robotmodel()
 {
 	model forge;
@@ -257,12 +266,12 @@ void create()
 		
 		if (n == 1)
 		{
-			cout << "(1.) Order\n(2.) Customer\n(3.) Sales Associate\n(4.) Robot Model\n(5.) Robot Component\n(6.) Back\n";
+			cout << "(1.) Order\n(2.) Customer\n(3.) Sales Associate\n(4.) Robot Component\n(5.) Back\n(6.) Print to file\n";
 			
 				int inp;
 				cin >> inp;
 				
-				if (inp == 5)
+				if (inp == 4)
 				{
 					create();
 				}
@@ -278,13 +287,13 @@ void create()
 				{
 					return;
 				}
-				else if (inp == 4)
+				else if (inp == 5)
 				{
 					return;
 				}
-				else if (inp == 6)
+				else if(inp == 6)
 				{
-					return;
+					printtofile();
 				}
 		}
 			else if (n == 3)
