@@ -1,11 +1,32 @@
 #include "control.h"
 #include "parts.h"
 #include "robotmodel.h"
-
+using namespace std;
 const string types[5] = { "torso","head","arm","locomotor","battery" };
 vector<model> models;
 vector<robo*> repo;
+vector<model> orders;
+void placeorder()
+{
+	for (int i = 0; i < models.size(); i++)
+	{
+		cout << "(" << i + 1 << "). ";
+		cout << "Name: " << models[i].name << "Model number: " << models[i].modelNumber << "Price: " << models[i].price;
+	}
 
+	int n;
+	cout << "Enter the number of the model you wish to order: ";
+	cin >> n;
+	model temp = models [n];
+	cout << "How many do you want to order? ";
+	int a;
+	cin >> a;
+	temp.quantity = a;
+	orders.push_back(temp);
+	int order_price = (models[n].price)*temp.quantity;
+	cout << "Name: " << temp.name<<endl << "Model number: " <<temp.modelNumber<<endl<< "Price: " << temp.price<<endl<<"Quantity: "<<temp.quantity<<endl;
+	cout << "Total price: "<<order_price<<endl;
+}
 void catalog()
 {
 	for (int i = 0; i < models.size(); i++)
@@ -23,16 +44,16 @@ void catalog()
 		newvec.push_back(repo[i]);
 	}
 		cout << "Parts:\n";
-		cout << "Name: " << newvec[n]->name;
-		cout << "\nPart number: " << newvec[n]->p_num;
-		cout << "\nType: " << newvec[n]->type;
-		cout << "\nWeight: " << newvec[n]->weight;
-		cout << "\nCost: " << newvec[n]->cost;
-		cout << "\nDesciption: " << newvec[n]->desc;
+		cout << "Name: " << newvec[n-1]->name;
+		cout << "\nPart number: " << newvec[n-1]->p_num;
+		cout << "\nType: " << newvec[n-1]->type;
+		cout << "\nWeight: " << newvec[n-1]->weight;
+		cout << "\nCost: " << newvec[n-1]->cost;
+		cout << "\nDesciption: " << newvec[n-1]->desc;
 	}
 void order()
 {
-	cout << "What woul you like to do?\n(1.) View catalog\n(3.) Return to previous menu\n";
+	cout << "What would you like to do?\n(1.) View catalog\n(2.) Place an order\n(3.) Return to previous menu\n";
 	int n;
 	cin>> n;
 	if (n == 3)
@@ -43,8 +64,13 @@ void order()
 	{
 		catalog();
 	}
+	else if (n == 2)
+	{
+		placeorder();
+	}
 
 }
+//function for printing to file under construction!!!
 /*void printtofile()
 {
 	std::ofstream output_file("./store.txt");
@@ -55,7 +81,7 @@ void robotmodel()
 {
 	model forge;
 
-	cout << "Select the parts you would like to create a model with. If no parts have been stored, you will be returned to the main menu.\n";
+	std::cout << "Select the parts you would like to create a model with. If no parts have been stored, you will be returned to the main menu.\n";
 	if (repo.size() == 0)
 	{
 		cout << "No parts found!";
@@ -301,7 +327,7 @@ void control()
 		
 		if (n == 1)
 		{
-			cout << "(1.) Order\n(2.) Customer\n(3.) Sales Associate\n(4.) Robot Component\n(5.) Back\n(6.) Print to file\n";
+			cout << "(1.) Order\n(2.) Customer\n(3.) Sales Associate\n(4.) Robot Component\n(5.) Back\n";
 			
 				int inp;
 				cin >> inp;
@@ -332,19 +358,25 @@ void control()
 					return;
 				}
 		}
-			else if (n == 3)
-			{
-				cout << "\n\nGoodbye!\n\n";
-				exit(1);
-
-			}
-		
-		
+		else if (n == 4)
+		{
+			cout << "Name: Muhammad Sohaib Siddiqui\n";
+			cout << "Student ID: 1001194047\n";
+			cout << "Class: CSE 1325-003\n";
+			cout << "Professor: George Rice\n";
+			cout << "Homework 5\n";
+			return;
+		}
+		else if (n == 3)
+		{
+			cout << "\n\nGoodbye!\n\n";
+			exit(1);
+		}
 	}
 void menu()
 	{
 		cout << "Welcome to the Robbie Robot Shop!\n";
 		cout << "What would you like to to do?\n";
-		cout << "(1). Create\n(2). Report\n(3). Quit\n ";
+		cout << "(1). Create\n(2). Report\n(3). Quit\n(4.) View student information\n";
 		control();
 	}

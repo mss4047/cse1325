@@ -18,6 +18,7 @@ public:
 	int modelNumber;
 	double price;
 	vector<robo*> parts;
+	int quantity;
 };
 
 void print()
