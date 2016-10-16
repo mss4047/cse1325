@@ -1,19 +1,56 @@
 #include "control.h"
 #include "parts.h"
 #include "robotmodel.h"
-#include <fstream>
-#include<iterator>
 
 const string types[5] = { "torso","head","arm","locomotor","battery" };
 vector<model> models;
 vector<robo*> repo;
 
-void printtofile()
+void catalog()
+{
+	for (int i = 0; i < models.size(); i++)
+	{
+		cout <<"("<<i+1<<"). ";
+		cout << "Name: " << models[i].name<<"Model number: "<<models[i].modelNumber<<"Price: "<<models[i].price;
+	}
+
+	int n;
+	cout << "Enter the number of the model who's parts you wish to see: ";
+	vector<robo*> newvec;
+	cin >> n;
+	for (int i = 0; i < repo.size(); i++)
+	{
+		newvec.push_back(repo[i]);
+	}
+		cout << "Parts:\n";
+		cout << "Name: " << newvec[n]->name;
+		cout << "\nPart number: " << newvec[n]->p_num;
+		cout << "\nType: " << newvec[n]->type;
+		cout << "\nWeight: " << newvec[n]->weight;
+		cout << "\nCost: " << newvec[n]->cost;
+		cout << "\nDesciption: " << newvec[n]->desc;
+	}
+void order()
+{
+	cout << "What woul you like to do?\n(1.) View catalog\n(3.) Return to previous menu\n";
+	int n;
+	cin>> n;
+	if (n == 3)
+	{
+		return;
+	}
+	else if (n == 1)
+	{
+		catalog();
+	}
+
+}
+/*void printtofile()
 {
 	std::ofstream output_file("./store.txt");
 	ostream_iterator<string> output_iterator(output_file, "\n");
 	copy(repo.begin(), repo.end(), output_iterator);
-}
+}*/
 void robotmodel()
 {
 	model forge;
@@ -237,7 +274,6 @@ void createnewpart()
 		return;
 	}
 }
-
 void create()
 {
 	cout << "------------\n(1.) Create Robot Parts\n(2.) Robot Model\n(3.) Order\n(4.) Return to main menu\n ";
@@ -258,8 +294,7 @@ void create()
 			return;
 		}
 }
-
-	void control()
+void control()
 	{
 		int n;
 		cin >> n;
@@ -277,7 +312,7 @@ void create()
 				}
 				else if (inp == 1)
 				{
-					return;
+					order();
 				}
 				else if (inp == 2)
 				{
@@ -293,7 +328,8 @@ void create()
 				}
 				else if(inp == 6)
 				{
-					printtofile();
+					//printtofile();
+					return;
 				}
 		}
 			else if (n == 3)
@@ -305,8 +341,7 @@ void create()
 		
 		
 	}
-
-	void menu()
+void menu()
 	{
 		cout << "Welcome to the Robbie Robot Shop!\n";
 		cout << "What would you like to to do?\n";

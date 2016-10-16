@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include<iterator>
 #include "parts.h"
 
 using namespace std;
@@ -18,4 +20,8 @@ public:
 	vector<robo*> parts;
 };
 
+void print()
+{
+
+}
 #endif

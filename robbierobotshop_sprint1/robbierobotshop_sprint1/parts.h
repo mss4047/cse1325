@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include<iterator>
 
 using namespace std;
 
