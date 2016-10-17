@@ -1,14 +1,17 @@
 #include "control.h"
 #include "parts.h"
 #include "robotmodel.h"
+
 using namespace std;
 const string types[5] = { "torso","head","arm","locomotor","battery" };
+
 vector<model> models;
 vector<robo*> repo;
 vector<model> orders;
+
 void placeorder()
 {
-	for (int i = 0; i < models.size(); i++)
+	for (unsigned int i = 0; i < models.size(); i++)
 	{
 		cout << "(" << i + 1 << "). ";
 		cout << "Name: " << models[i].name << "Model number: " << models[i].modelNumber << "Price: " << models[i].price;
@@ -302,7 +305,7 @@ void createnewpart()
 }
 void create()
 {
-	cout << "------------\n(1.) Create Robot Parts\n(2.) Robot Model\n(3.) Order\n(4.) Return to main menu\n ";
+	cout << "------------\n(1.) Create Robot Parts\n(2.) Create Robot Model\n(3.) Return to main menu\n ";
 	int a;
 	cin >> a;
 
@@ -314,8 +317,7 @@ void create()
 		{
 			robotmodel();
 		}
-
-		else if (a == 4)
+		else if (a == 3)
 		{
 			return;
 		}
@@ -325,9 +327,9 @@ void control()
 		int n;
 		cin >> n;
 		
-		if (n == 1)
+		if(n == 1)
 		{
-			cout << "(1.) Order\n(2.) Customer\n(3.) Sales Associate\n(4.) Robot Component\n(5.) Back\n";
+			cout << "(1.) Order\n(2.) Customer*\n(3.) Sales Associate*\n(4.) Robot Component\n(5.) Back\n";
 			
 				int inp;
 				cin >> inp;
@@ -335,10 +337,12 @@ void control()
 				if (inp == 4)
 				{
 					create();
+					return;
 				}
 				else if (inp == 1)
 				{
 					order();
+					return;
 				}
 				else if (inp == 2)
 				{
@@ -376,7 +380,7 @@ void control()
 void menu()
 	{
 		cout << "Welcome to the Robbie Robot Shop!\n";
-		cout << "What would you like to to do?\n";
-		cout << "(1). Create\n(2). Report\n(3). Quit\n(4.) View student information\n";
+		cout << "What would you like to to do? (an * means the option is not available)\n";
+		cout << "(1). Create\n(2). Report*\n(3). Quit\n(4.) View student information\n";
 		control();
 	}
