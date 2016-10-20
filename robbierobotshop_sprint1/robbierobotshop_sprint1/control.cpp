@@ -24,7 +24,7 @@ void SAVE()
 	for (int i = 0; i < models.size(); i++)
 	{
 		model newtemp = models[i];
-		if (newtemp.parts[newtemp.parts.size()-1]->type == "torso")
+		if (newtemp.parts[newtemp.parts.size()-1]->type == "head")
 		{
 				tempfile << newtemp.name << ",";
 				tempfile << newtemp.modelNumber << ",";
