@@ -22,11 +22,20 @@ public:
 	vector<Battery*> Batteriesm;
 	vector<Arm*> Armsm;
 	vector<Head*> Headsm;
-	int quantity=1;
 };
 
-void print()
+class Orders
 {
+public:
 
-}
+	int orderNumber;
+	string date;
+	string customer;
+	string salesAss;
+	model mod;
+	string status;
+	double shipping, tax, price, total;
+
+
+};
 #endif

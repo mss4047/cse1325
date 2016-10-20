@@ -62,9 +62,11 @@ class Torso : public robo
 public:
 	//Torso();
 	virtual void mysetter(string name, int p_num, string type, double weight, double cost, string desc);
-	int battery_compartment;
-	int arms;
-	int bat;
+	Head tHead;
+	vector<Arm> tArm;
+	int battery_compartments;
+	Locomotor tLoco;
+	vector<Battery> tBattery;
 };
 #endif
 
