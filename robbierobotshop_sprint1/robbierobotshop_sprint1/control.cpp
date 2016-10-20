@@ -243,7 +243,6 @@ void order()
 	}
 
 }
-//function for printing to file under construction!!!
 /*void printtofile()
 {
 	std::ofstream output_file("./store.txt");
