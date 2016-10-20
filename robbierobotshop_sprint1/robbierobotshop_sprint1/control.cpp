@@ -1,25 +1,59 @@
+//includes
 #include "control.h"
 #include "parts.h"
 #include "robotmodel.h"
 
-using namespace std;
+//using namespace std;
+
+//globals
+
 const string types[5] = { "torso","head","arm","locomotor","battery" };
 
 vector<model> models;
-vector<robo*> repo;
 vector<model> orders;
+vector<Torso*> torsos;
+vector<Head*> heads;
+vector<Battery*> batteries;
+vector <Arm*> arms;
+vector<Locomotor*> locomotors;
 
+void SAVE()
+{
+	ofstream tempfile;
+	tempfile.open("store.txt");
+	for (int i = 0; i < models.size(); i++)
+	{
+		model newtemp = models[i];
+		if (newtemp.parts[newtemp.parts.size()-1]->type == "torso")
+		{
+				tempfile << newtemp.name << ",";
+				tempfile << newtemp.modelNumber << ",";
+				tempfile << newtemp.price << ",";
+				tempfile << newtemp.quantity << ",";
+				tempfile << newtemp.parts[0]->name << ",";
+				tempfile << newtemp.parts[0]->p_num << ",";
+				tempfile << newtemp.parts[0]->type << ",";
+				tempfile << newtemp.parts[0]->weight << ",";
+				tempfile << newtemp.parts[0]->cost << ",";
+				tempfile << newtemp.parts[0]->desc << ",";
+				tempfile << repo[i]->battery_compartment;
+		}
+	}
+	
+	tempfile.close();
+}
 void placeorder()
 {
 	for (unsigned int i = 0; i < models.size(); i++)
 	{
 		cout << "(" << i + 1 << "). ";
-		cout << "Name: " << models[i].name << "Model number: " << models[i].modelNumber << "Price: " << models[i].price;
+		cout << "Name: " << models[i].name << " Model number: " << models[i].modelNumber << " Price: " << models[i].price<<endl;
 	}
 
 	int n;
 	cout << "Enter the number of the model you wish to order: ";
 	cin >> n;
+	n -= 1;
 	model temp = models [n];
 	cout << "How many do you want to order? ";
 	int a;
@@ -29,31 +63,95 @@ void placeorder()
 	int order_price = (models[n].price)*temp.quantity;
 	cout << "Name: " << temp.name<<endl << "Model number: " <<temp.modelNumber<<endl<< "Price: " << temp.price<<endl<<"Quantity: "<<temp.quantity<<endl;
 	cout << "Total price: "<<order_price<<endl;
+	cout << "Order placed!\n";
 }
 void catalog()
 {
 	for (int i = 0; i < models.size(); i++)
 	{
 		cout <<"("<<i+1<<"). ";
-		cout << "Name: " << models[i].name<<"Model number: "<<models[i].modelNumber<<"Price: "<<models[i].price;
+		cout << "Name: " << models[i].name<<"Model number: "<<models[i].modelNumber<<"Price: "<<models[i].price<<endl;
 	}
 
 	int n;
 	cout << "Enter the number of the model who's parts you wish to see: ";
-	vector<robo*> newvec;
 	cin >> n;
-	for (int i = 0; i < repo.size(); i++)
+	n -= 1;
+	models[n];
+	if (models[n].Headsm.size() != 0)
 	{
-		newvec.push_back(repo[i]);
+		for (int j = 0; j < models[n].Headsm.size(); j++)
+		{
+			cout << models[n].Headsm[j]->name<<endl;
+			cout << models[n].Headsm[j]->p_num << endl;
+			cout << models[n].Headsm[j]->type << endl;
+			cout << models[n].Headsm[j]->weight << endl;
+			cout << models[n].Headsm[j]->cost << endl;
+			cout << models[n].Headsm[j]->desc << endl;
+		}
 	}
-		cout << "Parts:\n";
-		cout << "Name: " << newvec[n-1]->name;
-		cout << "\nPart number: " << newvec[n-1]->p_num;
-		cout << "\nType: " << newvec[n-1]->type;
-		cout << "\nWeight: " << newvec[n-1]->weight;
-		cout << "\nCost: " << newvec[n-1]->cost;
-		cout << "\nDesciption: " << newvec[n-1]->desc;
+
+	if (models[n].Armsm.size() != 0)
+	{
+		for (int j = 0; j < models[n].Armsm.size(); j++)
+		{
+			cout << models[n].Armsm[j]->name << endl;
+			cout << models[n].Armsm[j]->p_num << endl;
+			cout << models[n].Armsm[j]->type << endl;
+			cout << models[n].Armsm[j]->weight << endl;
+			cout << models[n].Armsm[j]->cost << endl;
+			cout << models[n].Armsm[j]->desc << endl;
+			cout << models[n].Armsm[j]->power_con << endl;
+		}
 	}
+
+	if (models[n].Batteriesm.size() != 0)
+	{
+		for (int j = 0; j < models[n].Batteriesm.size(); j++)
+		{
+			cout << models[n].Batteriesm[j]->name << endl;
+			cout << models[n].Batteriesm[j]->p_num << endl;
+			cout << models[n].Batteriesm[j]->type << endl;
+			cout << models[n].Batteriesm[j]->weight << endl;
+			cout << models[n].Batteriesm[j]->cost << endl;
+			cout << models[n].Batteriesm[j]->desc << endl;
+			cout << models[n].Batteriesm[j]->energy << endl;
+			cout << models[n].Batteriesm[j]->maxPower << endl;
+		}
+	}
+
+	if (models[n].Locomotorsm.size() != 0)
+	{
+		for (int j = 0; j < models[n].Locomotorsm.size(); j++)
+		{
+			cout << models[n].Locomotorsm[j]->name << endl;
+			cout << models[n].Locomotorsm[j]->p_num << endl;
+			cout << models[n].Locomotorsm[j]->type << endl;
+			cout << models[n].Locomotorsm[j]->weight << endl;
+			cout << models[n].Locomotorsm[j]->cost << endl;
+			cout << models[n].Locomotorsm[j]->desc << endl;
+			cout << models[n].Locomotorsm[j]->max_speed << endl;
+			cout << models[n].Locomotorsm[j]->power_conloco << endl;
+		}
+	}
+	
+	if (models[n].Torsosm.size() != 0)
+	{
+		for (int j = 0; j < models[n].Headsm.size(); j++)
+		{
+			cout << models[n].Torsosm[j]->name << endl;
+			cout << models[n].Torsosm[j]->p_num << endl;
+			cout << models[n].Torsosm[j]->type << endl;
+			cout << models[n].Torsosm[j]->weight << endl;
+			cout << models[n].Torsosm[j]->cost << endl;
+			cout << models[n].Torsosm[j]->desc << endl;
+			cout << models[n].Torsosm[j]->bat << endl;
+			cout << models[n].Torsosm[j]->battery_compartment << endl;
+			cout << models[n].Torsosm[j]->arms << endl;
+		}
+	}
+
+}
 void order()
 {
 	cout << "What would you like to do?\n(1.) View catalog\n(2.) Place an order\n(3.) Return to previous menu\n";
@@ -84,37 +182,134 @@ void robotmodel()
 {
 	model forge;
 
-	std::cout << "Select the parts you would like to create a model with. If no parts have been stored, you will be returned to the main menu.\n";
-	if (repo.size() == 0)
+	cout << "Select the parts you would like to create a model with. If no parts have been stored, you will be returned to the main menu.\n";
+	if (heads.size() == 0 && batteries.size() == 0 && arms.size() == 0 && locomotors.size() == 0 && torsos.size() == 0)
 	{
-		cout << "No parts found!";
+		cout << "\nNo parts found!\n";
 		return;
 	}
 	else
 	{
+		cout << "\nA list of the name and part number of the parts stored will be displayed. Enter [y] once you see the one you need or [n] to view the next part\n";
+		
 		int flag = 0;
-		cout << "A list of the name and part number of the parts stored will be displayed. Enter [y] once you see the one you need\n";
-		for (unsigned int i = 0; i<repo.size(); i++)
+		
+		if (torsos.size() != 0)
 		{
-			char let;
-			cout << repo[i]->name<<endl;
-			cout << repo[i]->p_num<<endl;
-			cout << "\n[y/n]\n";
-			cin >> let;
-			if (let == 'y')
+			for (unsigned int i = 0; i<torsos.size(); i++)
 			{
-				forge.parts.push_back(repo[i]);
-				flag++;
-				break;
-			}
-			else
-			{
-				continue;
+				char let;
+				cout << torsos[i]->name << endl;
+				cout << torsos[i]->p_num << endl;
+				cout << "\n[y/n]\n";
+				cin >> let;
+				if (let == 'y')
+				{
+					forge.Torsosm.push_back(torsos[i]);
+					flag++;
+					break;
+				}
+				else
+				{
+					continue;
+				}
 			}
 		}
-		if(flag==0){
+
+		if (heads.size() != 0)
+		{
+			for (unsigned int i = 0; i<heads.size(); i++)
+			{
+				char let;
+				cout << heads[i]->name << endl;
+				cout << heads[i]->p_num << endl;
+				cout << "\n[y/n]\n";
+				cin >> let;
+				if (let == 'y')
+				{ 
+					forge.Headsm.push_back(heads[i]);
+					flag++;
+					break;
+				}
+				else
+				{
+					continue;
+				}
+			}
+		}
+
+		if (batteries.size() != 0)
+		{
+			for (unsigned int i = 0; i<batteries.size(); i++)
+			{
+				char let;
+				cout << batteries[i]->name << endl;
+				cout << batteries[i]->p_num << endl;
+				cout << "\n[y/n]\n";
+				cin >> let;
+				if (let == 'y')
+				{
+					forge.Batteriesm.push_back(batteries[i]);
+					flag++;
+					break;
+				}
+				else
+				{
+					continue;
+				}
+			}
+		}
+
+		if (arms.size() != 0)
+		{
+			for (unsigned int i = 0; i<arms.size(); i++)
+			{
+				char let;
+				cout << arms[i]->name << endl;
+				cout << arms[i]->p_num << endl;
+				cout << "\n[y/n]\n";
+				cin >> let;
+				if (let == 'y')
+				{
+					forge.Armsm.push_back(arms[i]);
+					flag++;
+					break;
+				}
+				else
+				{
+					continue;
+				}
+			}
+		}
+
+		if (locomotors.size() != 0)
+		{
+			for (unsigned int i = 0; i<locomotors.size(); i++)
+			{
+				char let;
+				cout << locomotors[i]->name << endl;
+				cout << locomotors[i]->p_num << endl;
+				cout << "\n[y/n]\n";
+				cin >> let;
+				if (let == 'y')
+				{
+					forge.Locomotorsm.push_back(locomotors[i]);
+					flag++;
+					break;
+				}
+				else
+				{
+					continue;
+				}
+			}
+		}
+
+		if(flag==0)
+		{
+			cout << "\nNo more parts to display! You will now be returned to the previous menu...\n";
 			return;
 		}
+
 	cout << "Input the follolwing information of the robot model\n";
 	
 	cout << "Name: ";
@@ -167,7 +362,13 @@ void createnewpart()
 		cout << "Enter number of battery compartment: ";
 		cin >> newTorso->battery_compartment;
 
-		repo.push_back(newTorso);
+		cout << "Enter number of arms: ";
+		cin >> newTorso->arms;
+
+		cout << "Enter number of batteries: ";
+		cin >> newTorso->bat;
+
+		torsos.push_back(newTorso);
 
 		cout << "Added\n";
 	}
@@ -195,7 +396,7 @@ void createnewpart()
 		cin.clear();
 		getline(cin, newHead->desc);
 
-		repo.push_back(newHead);
+		heads.push_back(newHead);
 
 		cout << "Added\n";
 	}
@@ -223,11 +424,10 @@ void createnewpart()
 		cin.clear();
 		getline(cin, newArm->desc);
 
-		repo.push_back(newArm);
-
-		cout << "Enter a power consumption: ";
+		cout << "Enter the power consumption: ";
 		cin >> newArm->power_con;
-
+		
+		arms.push_back(newArm);
 		cout << "Added\n";
 	}
 	else if (choice == 4)
@@ -254,14 +454,12 @@ void createnewpart()
 		cin.clear();
 		getline(cin, newLocomotor->desc);
 
-		repo.push_back(newLocomotor);
-
-		cout << "Enter a power consumption: ";
+		cout << "Enter the power consumption: ";
 		cin >> newLocomotor->power_conloco;
 
 		cout << "Enter the max speed: ";
 		cin >> newLocomotor->max_speed;
-
+		locomotors.push_back(newLocomotor);
 		cout << "Added\n";
 	}
 	else if (choice == 5)
@@ -294,7 +492,7 @@ void createnewpart()
 		cout << "Input the maxPower: ";
 		cin >> newBattery->maxPower;
 
-		repo.push_back(newBattery);
+		batteries.push_back(newBattery);
 
 		cout << "Added\n";
 	}
@@ -329,7 +527,7 @@ void control()
 		
 		if(n == 1)
 		{
-			cout << "(1.) Order\n(2.) Customer*\n(3.) Sales Associate*\n(4.) Robot Component\n(5.) Back\n";
+			cout << "(1.) Order\n(2.) Customer*\n(3.) Sales Associate*\n(4.) Create robot model or component\n(5.) Back\n";
 			
 				int inp;
 				cin >> inp;
@@ -373,7 +571,8 @@ void control()
 		}
 		else if (n == 3)
 		{
-			cout << "\n\nGoodbye!\n\n";
+			cout << "\n\nSaving...\n\n";
+			SAVE();
 			exit(1);
 		}
 	}

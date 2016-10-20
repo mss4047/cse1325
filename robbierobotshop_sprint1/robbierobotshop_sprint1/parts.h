@@ -63,8 +63,8 @@ public:
 	//Torso();
 	virtual void mysetter(string name, int p_num, string type, double weight, double cost, string desc);
 	int battery_compartment;
-	vector<Arm> arms;
-	vector<Battery> bat;
+	int arms;
+	int bat;
 };
 #endif
 

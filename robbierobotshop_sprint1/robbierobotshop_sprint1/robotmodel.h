@@ -17,8 +17,12 @@ public:
 	string name;
 	int modelNumber;
 	double price;
-	vector<robo*> parts;
-	int quantity;
+	vector<Torso*> Torsosm;
+	vector<Locomotor*> Locomotorsm;
+	vector<Battery*> Batteriesm;
+	vector<Arm*> Armsm;
+	vector<Head*> Headsm;
+	int quantity=1;
 };
 
 void print()
